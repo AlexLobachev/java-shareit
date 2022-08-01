@@ -9,17 +9,11 @@ import ru.practicum.shareit.user.model.User;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
-import java.util.function.Function;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class InMemoryUserStorage implements UserStorage {
-
-
 
 
     private final Map<Integer, User> users = new HashMap<>();

@@ -15,7 +15,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @Valid
 public class UserController {
-    InMemoryUserStorage inMemoryUserStorage;
+    private InMemoryUserStorage inMemoryUserStorage;
 
     @GetMapping
     public Collection<User> getAllUsers() {

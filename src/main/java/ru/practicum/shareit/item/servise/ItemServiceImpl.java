@@ -5,14 +5,13 @@ import org.springframework.stereotype.Service;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.storage.InMemoryItemStorage;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
 public class ItemServiceImpl implements ItemService {
-    InMemoryItemStorage inMemoryItemStorage;
+    private InMemoryItemStorage inMemoryItemStorage;
 
     public List<Item> getItemsUser(Integer idOwner) {
         List<Item> itemList = new ArrayList<>();
@@ -35,7 +34,7 @@ public class ItemServiceImpl implements ItemService {
                 }
             }
         }
-        return itemList;
+       return itemList;
     }
 
 

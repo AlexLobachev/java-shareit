@@ -5,7 +5,7 @@ import ru.practicum.shareit.user.model.User;
 import java.util.Collection;
 
 public interface UserStorage {
-    public Collection<User> getAllUsers();
-    public User addUser(User user) ;
-    public User updateUser(Integer id,User user);
+    Collection<User> getAllUsers();
+    User addUser(User user) ;
+    User updateUser(Integer id,User user);
 }
