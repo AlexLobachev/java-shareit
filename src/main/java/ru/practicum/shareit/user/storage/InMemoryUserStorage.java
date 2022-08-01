@@ -14,11 +14,8 @@ import java.util.Map;
 @Component
 @RequiredArgsConstructor
 public class InMemoryUserStorage implements UserStorage {
-
-
     private final Map<Integer, User> users = new HashMap<>();
     private final Map<Integer, String> listEmail = new HashMap();
-
     private Integer id = 0;
 
     public Collection<User> getAllUsers() {

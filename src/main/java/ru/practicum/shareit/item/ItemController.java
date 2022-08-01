@@ -5,7 +5,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.exteption.NullAllowed;
 import ru.practicum.shareit.item.dto.ItemDto;
-import ru.practicum.shareit.item.dto.MapperToItemDto;
+import ru.practicum.shareit.item.dto.ItemMapper;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.servise.ItemServiceImpl;
 import ru.practicum.shareit.item.storage.InMemoryItemStorage;
@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ru.practicum.shareit.item.dto.MapperToItemDto.toItemDto;
+import static ru.practicum.shareit.item.dto.ItemMapper.toItemDto;
 
 
 @RestController
@@ -48,14 +48,14 @@ public class ItemController {
     @GetMapping
     public List<ItemDto> getItemsUser(@RequestHeader("X-Sharer-User-Id") Integer idOwner) {
         return itemServiceImpl.getItemsUser(idOwner).stream()
-                .map(MapperToItemDto::toItemDto)
+                .map(ItemMapper::toItemDto)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/search")
     public List<ItemDto> getSearchName(@RequestParam String text) {
         return itemServiceImpl.getSearchName(text).stream()
-                .map(MapperToItemDto::toItemDto)
+                .map(ItemMapper::toItemDto)
                 .collect(Collectors.toList());
     }
 
