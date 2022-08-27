@@ -47,8 +47,3 @@ CREATE TABLE IF NOT EXISTS REQUESTS(
     created TIMESTAMP );
 
 
-
-
---select owner_id from BOOKING where item_id = 1 and status = 'APPROVED' or status = 'CANCELED' or end_time >  '2008-09-01' group by owner_id
-
-select * from BOOKING where end_time = '2022-08-26' ::date and owner_id = 4
