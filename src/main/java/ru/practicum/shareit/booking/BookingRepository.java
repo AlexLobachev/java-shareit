@@ -21,10 +21,10 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
 
     List<Booking> findAllByBooker_IdAndStatusOrderByIdDesc(Long id, Status status);
 
-    @Query("select b from Booking b where b.start < ?2 and b.end < ?2 and b.item.owner.id=?1")
+    @Query("select b from Booking b where  b.end < ?2 and b.item.owner.id=?1")
     List<Booking> findByOrderPast(Long id, LocalDateTime localDateTime);
 
-    @Query("select b from Booking b where b.start < ?2 and b.end < ?2 and b.booker.id =?1")
+    @Query("select b from Booking b where  b.end < ?2 and b.booker.id =?1")
     List<Booking> findByUserPast(Long id, LocalDateTime localDateTime);
 
     List<Booking> findByStatusOrderByIdDesc(Status status);

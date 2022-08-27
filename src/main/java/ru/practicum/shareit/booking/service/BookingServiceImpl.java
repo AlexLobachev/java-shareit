@@ -64,10 +64,12 @@ public class BookingServiceImpl implements BookingService {
             case ("FUTURE"):
                 return bookingRepository.findByStatusNotAndStatusNotOrderByIdDesc(REJECTED, CANCELED).stream().filter(x -> x.getItem().getOwner().getId().equals(ownerId)).map(BookingMapper::toBookingDto).collect(Collectors.toList());
             case ("CURRENT"):
+                System.out.println("TIME NOW    " + LocalDateTime.now());
                 return bookingRepository.findByOrderCurrent(LocalDateTime.now(), ownerId).stream().map(BookingMapper::toBookingDto).collect(Collectors.toList());
             case ("REJECTED"):
                 return bookingRepository.findByStatusOrderByIdDesc(REJECTED).stream().filter(x -> x.getItem().getOwner().getId().equals(ownerId)).map(BookingMapper::toBookingDto).collect(Collectors.toList());
             case ("PAST"):
+
                 return bookingRepository.findByOrderPast(ownerId, LocalDateTime.now()).stream().map(BookingMapper::toBookingDto).collect(Collectors.toList());
             case ("ALL"):
                 return bookingRepository.findAllByOrderByIdDesc().stream().filter(x -> x.getItem().getOwner().getId().equals(ownerId)).map(BookingMapper::toBookingDto).collect(Collectors.toList());
