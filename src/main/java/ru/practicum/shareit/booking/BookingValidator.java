@@ -24,6 +24,9 @@ public class BookingValidator {
         if (itemServiceImpl.getItem(booking.getItemId(),booking.getBooker().getId()).getOwner().getId().equals(booking.getBooker().getId())){
             throw new ExceptionNotFoundUser("Пользователь не может бронировать свои вещи");
         }
+        if (booking.getStart().isAfter(booking.getEnd())){
+            throw new ExclusionInvalidRequest("Время окончания не может быть раньше времени старта");
+        }
 
     }
 
