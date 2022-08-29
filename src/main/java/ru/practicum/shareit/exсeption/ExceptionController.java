@@ -1,5 +1,6 @@
-package ru.practicum.shareit.exteption;
+package ru.practicum.shareit.exсeption;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -41,6 +42,11 @@ public class ExceptionController {
     public Map<String, String> errorException(final HttpMessageNotWritableException e) {
         return Map.of("ERROR", "ОШИБКА ВВОДА",
                 "errorMessage", "Пользователь не существует");
+    }
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Map<String, String> errorException(final DataIntegrityViolationException e) {
+        return Map.of("error", Objects.requireNonNull(e.getMessage()));
     }
 
 }

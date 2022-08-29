@@ -2,8 +2,7 @@ package ru.practicum.shareit.item.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import ru.practicum.shareit.exteption.NullAllowed;
+import ru.practicum.shareit.exсeption.NullAllowed;
 
 import javax.validation.constraints.NotBlank;
 @Data

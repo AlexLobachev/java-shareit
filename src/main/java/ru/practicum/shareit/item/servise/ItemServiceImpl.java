@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.booking.BookingRepository;
 import ru.practicum.shareit.booking.model.Booking;
-import ru.practicum.shareit.exteption.ExclusionInvalidRequest;
+import ru.practicum.shareit.exсeption.ExclusionInvalidRequest;
 import ru.practicum.shareit.item.CommentsRepository;
 import ru.practicum.shareit.item.ItemRepository;
 import ru.practicum.shareit.item.ItemValidator;

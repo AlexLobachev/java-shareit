@@ -26,10 +26,8 @@ public class Booking {
     @Column(name = "end_time")
     @FutureOrPresent
     private LocalDateTime end;
-    transient private Long itemId;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id", nullable = false)
-    //private Item item;
     private Item item;
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)

@@ -3,6 +3,7 @@ package ru.practicum.shareit.booking;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.booking.dto.BookingDto;
+import ru.practicum.shareit.booking.dto.BookingRequest;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.service.BookingServiceImpl;
 import ru.practicum.shareit.item.model.Item;
@@ -10,6 +11,7 @@ import ru.practicum.shareit.item.model.Item;
 import java.util.List;
 
 import static ru.practicum.shareit.booking.dto.BookingMapper.toBookingDto;
+import static ru.practicum.shareit.booking.dto.BookingMapper.toBookingRequest;
 
 
 @RestController
@@ -18,9 +20,10 @@ import static ru.practicum.shareit.booking.dto.BookingMapper.toBookingDto;
 public class BookingController {
     private final BookingServiceImpl bookingServiceImpl;
     @PostMapping
-    public Booking bookingRequest (@RequestBody Booking booking,
+
+    public Booking bookingRequest (@RequestBody BookingRequest booking,
                                    @RequestHeader("X-Sharer-User-Id") Long id){
-        return bookingServiceImpl.bookingRequest(booking, id);
+        return bookingServiceImpl.bookingRequest(toBookingRequest(booking), id,booking.getItemId());
     }
     @PatchMapping(value = "{bookingId}")
     public BookingDto confirmOrRejectBooking(@PathVariable Long bookingId,

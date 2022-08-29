@@ -9,7 +9,7 @@ import ru.practicum.shareit.booking.BookingValidator;
 import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.dto.BookingMapper;
 import ru.practicum.shareit.booking.model.Booking;
-import ru.practicum.shareit.exteption.ExceptionNotFoundUser;
+import ru.practicum.shareit.exсeption.ExceptionNotFoundUser;
 import ru.practicum.shareit.item.ItemRepository;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.servise.ItemServiceImpl;
@@ -27,17 +27,17 @@ import static ru.practicum.shareit.booking.model.Status.*;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class BookingServiceImpl implements BookingService {
+public class BookingServiceImpl /*implements BookingService*/ {
     private final BookingRepository bookingRepository;
     private final ItemRepository itemRepository;
     private final ItemServiceImpl itemServiceImpl;
     private final UserServiceImpl userServiceImpl;
     private final BookingValidator validator;
 
-    public Booking bookingRequest(Booking booking, Long id) {
+    public Booking bookingRequest(Booking booking, Long id,Long itemId) {
         booking.setBooker(userServiceImpl.getUser(id));
-        booking.setItem(itemRepository.findById(booking.getItemId()).orElse(new Item()));
-        validator.checkPost(booking);
+        booking.setItem(itemRepository.findById(itemId).orElse(new Item()));
+        validator.checkPost(booking,itemId);
         return bookingRepository.save(booking);
     }
 
@@ -64,7 +64,6 @@ public class BookingServiceImpl implements BookingService {
             case ("FUTURE"):
                 return bookingRepository.findByStatusNotAndStatusNotOrderByIdDesc(REJECTED, CANCELED).stream().filter(x -> x.getItem().getOwner().getId().equals(ownerId)).map(BookingMapper::toBookingDto).collect(Collectors.toList());
             case ("CURRENT"):
-                System.out.println("TIME NOW    " + LocalDateTime.now());
                 return bookingRepository.findByOrderCurrent(LocalDateTime.now(), ownerId).stream().map(BookingMapper::toBookingDto).collect(Collectors.toList());
             case ("REJECTED"):
                 return bookingRepository.findByStatusOrderByIdDesc(REJECTED).stream().filter(x -> x.getItem().getOwner().getId().equals(ownerId)).map(BookingMapper::toBookingDto).collect(Collectors.toList());

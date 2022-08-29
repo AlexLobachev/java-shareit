@@ -2,7 +2,7 @@ package ru.practicum.shareit.item;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.practicum.shareit.exteption.ExceptionNotFoundUser;
+import ru.practicum.shareit.exсeption.ExceptionNotFoundUser;
 @AllArgsConstructor
 @Service
 public class ItemValidator {

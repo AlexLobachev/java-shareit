@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import ru.practicum.shareit.exteption.NullAllowed;
+import ru.practicum.shareit.exсeption.NullAllowed;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

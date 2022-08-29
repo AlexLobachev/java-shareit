@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.model.Status;
-import ru.practicum.shareit.exteption.ExceptionNotFoundUser;
-import ru.practicum.shareit.exteption.ExclusionInvalidRequest;
+import ru.practicum.shareit.exсeption.ExceptionNotFoundUser;
+import ru.practicum.shareit.exсeption.ExclusionInvalidRequest;
 import ru.practicum.shareit.item.servise.ItemServiceImpl;
 
 import static ru.practicum.shareit.booking.model.Status.*;
@@ -15,13 +15,12 @@ import static ru.practicum.shareit.booking.model.Status.*;
 @Service
 public class BookingValidator {
     private ItemServiceImpl itemServiceImpl;
+    public void checkPost(Booking booking,Long itemId) {
 
-    private BookingRepository bookingRepository;
-    public void checkPost(Booking booking) {
-        if (!itemServiceImpl.getItem(booking.getItemId(),booking.getBooker().getId()).getAvailable()) {
+        if (!itemServiceImpl.getItem(itemId,booking.getBooker().getId()).getAvailable()) {
             throw new ExclusionInvalidRequest("Вещь недоступна для бронирования");
         }
-        if (itemServiceImpl.getItem(booking.getItemId(),booking.getBooker().getId()).getOwner().getId().equals(booking.getBooker().getId())){
+        if (itemServiceImpl.getItem(itemId,booking.getBooker().getId()).getOwner().getId().equals(booking.getBooker().getId())){
             throw new ExceptionNotFoundUser("Пользователь не может бронировать свои вещи");
         }
         if (booking.getStart().isAfter(booking.getEnd())){
