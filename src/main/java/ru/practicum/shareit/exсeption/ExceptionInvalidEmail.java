@@ -1,4 +1,4 @@
-package ru.practicum.shareit.exteption;
+package ru.practicum.shareit.exсeption;
 
 public class ExceptionInvalidEmail extends RuntimeException {
     public ExceptionInvalidEmail(String message) {
