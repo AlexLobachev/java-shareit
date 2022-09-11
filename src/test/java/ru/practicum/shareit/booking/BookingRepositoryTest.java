@@ -47,15 +47,6 @@ class BookingRepositoryTest {
         booking.setItem(itemRepository.findById(1L).orElse(new Item()));
     }
 
-    @Test
-    void updateStatus() {
-        beforeEach();
-        bookingRepository.save(booking);
-
-        booking = bookingRepository.findById(1L).orElse(new Booking());
-
-        Assertions.assertEquals(booking.getStatus(), WAITING);
-    }
 
     @Test
     void findByOrderPast() {
