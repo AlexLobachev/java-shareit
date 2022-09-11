@@ -15,10 +15,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static ru.practicum.shareit.booking.model.Status.APPROVED;
-import static ru.practicum.shareit.booking.model.Status.WAITING;
 
 @DataJpaTest
 @Transactional
+
 class BookingRepositoryTest {
     @Autowired
     private BookingRepository bookingRepository;
@@ -47,10 +47,19 @@ class BookingRepositoryTest {
         booking.setItem(itemRepository.findById(1L).orElse(new Item()));
     }
 
+    /*@Test
+    void updateStatus() {
+
+        bookingRepository.save(booking);
+        bookingRepository.updateStatus(APPROVED, 1L);
+        booking = bookingRepository.findById(1L).orElse(new Booking());
+System.out.println(booking);
+        Assertions.assertEquals(booking.getStatus(), APPROVED);
+    }*/
 
     @Test
     void findByOrderPast() {
-
+        beforeEach();
         List<Booking> bookings = bookingRepository.findByOrderPast(2L, LocalDateTime.now().plusSeconds(10));
         Assertions.assertNotNull(bookings);
     }

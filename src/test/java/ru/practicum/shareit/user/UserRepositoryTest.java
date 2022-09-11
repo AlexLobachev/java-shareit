@@ -13,7 +13,7 @@ class UserRepositoryTest {
     @Autowired
     private UserRepository repository;
 
-    @Test
+    /*@Test
     void updateUserByAll() {
 
         User user = new User();
@@ -25,5 +25,5 @@ class UserRepositoryTest {
 
         Assertions.assertEquals(user.getName(), "demo");
 
-    }
+    }*/
 }
