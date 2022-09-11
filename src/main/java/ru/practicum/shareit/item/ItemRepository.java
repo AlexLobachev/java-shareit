@@ -4,7 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.model.Item;
+import ru.practicum.shareit.requests.dto.ItemRequestDto;
+import ru.practicum.shareit.requests.model.ItemRequest;
 
 import java.util.List;
 
@@ -29,6 +32,19 @@ public interface ItemRepository extends JpaRepository <Item,Long> {
 
     @Query("SELECT i FROM Item i WHERE lower (i.description)  like  %:description% AND i.available = true")
     List<Item> findAllByName(@Param("description") String description);
+
+    List<Item> findAllByRequestId(Long userId);
+
+    List<Item> findAllByRequestIdNotNull();
+
+
+
+
+
+
+
+
+
 
 
 }

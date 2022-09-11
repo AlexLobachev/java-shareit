@@ -7,6 +7,7 @@ import ru.practicum.shareit.exсeption.NullAllowed;
 import ru.practicum.shareit.item.dto.ItemBookingDto;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.dto.ItemMapper;
+import ru.practicum.shareit.item.dto.RequestItemDto;
 import ru.practicum.shareit.item.model.Comments;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.servise.ItemServiceImpl;
@@ -25,7 +26,7 @@ public class ItemController {
     private ItemServiceImpl itemServiceImpl;
 
     @PostMapping
-    public Item addItem(@Validated(NullAllowed.class)
+    public ItemDto addItem(@Validated(NullAllowed.class)
                         @RequestBody Item item,
                         @RequestHeader("X-Sharer-User-Id") Long idOwner) {
         return itemServiceImpl.addItem(item, idOwner);

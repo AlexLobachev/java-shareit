@@ -1,10 +1,7 @@
 package ru.practicum.shareit.user.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import ru.practicum.shareit.exсeption.NullAllowed;
 
 import javax.persistence.*;
@@ -17,6 +14,7 @@ import java.util.Objects;
 @ToString
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "users")
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class User {

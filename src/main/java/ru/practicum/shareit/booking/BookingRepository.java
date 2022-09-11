@@ -1,5 +1,7 @@
 package ru.practicum.shareit.booking;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,7 +17,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     @Query("update Booking b set b.status =?1 where b.id = ?2")
     void updateStatus(Status status, Long id);
 
-    List<Booking> findByBooker_idOrderByIdDesc(Long id);
+    Page<Booking> findByBooker_idOrderByIdDesc(Long id, Pageable pageable);
 
     List<Booking> findByStatusNotAndStatusNotOrderByIdDesc(Status rejected, Status canceled);
 
@@ -35,8 +37,8 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     @Query("select b from Booking b where b.end > ?1 and b.start < ?1 and b.booker.id = ?2")
     List<Booking> findByUserCurrent(LocalDateTime localDateTime, Long ownerId);
 
-    List<Booking> findAllByOrderByIdDesc();
-
+    @Query("select B from Booking B left join Item I on I.id = B.item.id where I.owner.id =?1 order by  B.id desc ")
+    Page<Booking> findAllByOrderByIdDesc(Long ownerId, Pageable pageable);
 
     @Query(value = "" +
             "select b.booker.id " +
@@ -47,5 +49,6 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     List<Long> findByItem_id(Long id, LocalDateTime dateTime);
 
     List<Booking> findByItem_idOrderByStartAsc(Long id);
+
 
 }
