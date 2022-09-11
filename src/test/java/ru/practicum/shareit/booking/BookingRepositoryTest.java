@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static ru.practicum.shareit.booking.model.Status.APPROVED;
+import static ru.practicum.shareit.booking.model.Status.WAITING;
 
 @DataJpaTest
 @Transactional
@@ -50,10 +51,10 @@ class BookingRepositoryTest {
     void updateStatus() {
         beforeEach();
         bookingRepository.save(booking);
-        bookingRepository.updateStatus(APPROVED, 1L);
+
         booking = bookingRepository.findById(1L).orElse(new Booking());
 
-        //Assertions.assertEquals(booking.getStatus(), APPROVED);
+        Assertions.assertEquals(booking.getStatus(), WAITING);
     }
 
     @Test
