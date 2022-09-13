@@ -65,7 +65,7 @@ class BookingRepositoryTest {
 
     @Test
     void findByUserPast() {
-        List<Booking> bookings = bookingRepository.findByOrderPast(3L, LocalDateTime.now().plusSeconds(10));
+        List<Booking> bookings = bookingRepository.findByOrderPast(booking.getId(), LocalDateTime.now().plusSeconds(10));
         Assertions.assertNotNull(bookings);
     }
 
