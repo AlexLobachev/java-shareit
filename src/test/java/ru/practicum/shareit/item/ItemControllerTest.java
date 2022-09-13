@@ -42,8 +42,7 @@ class ItemControllerTest {
     }
 
     @Test
-    void addItem() throws Exception {
-        System.out.println("НАЧАЛО");
+    void addItem() throws Exception {       
         ItemDto itemDto = itemDto(item);
         when(itemServiceImpl.addItem(any(), anyLong()))
                 .thenReturn(itemDto);
@@ -134,8 +133,7 @@ class ItemControllerTest {
         itemBookingDto.setId(item.getId());
         itemBookingDto.setName(item.getName());
         itemBookingDto.setDescription(item.getDescription());
-        itemBookingDto.setAvailable(item.getAvailable());
-        System.out.println("КОНЕЦ");
+        itemBookingDto.setAvailable(item.getAvailable());        
         return itemBookingDto;
 
     }
