@@ -1,14 +1,11 @@
 package ru.practicum.shareit.requests.servise;
 
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.item.ItemRepository;
-import ru.practicum.shareit.item.servise.ItemServiceImpl;
 import ru.practicum.shareit.requests.ItemRequestRepository;
 import ru.practicum.shareit.requests.OffsetLimitPageable;
-import ru.practicum.shareit.requests.RequestsValidator;
 import ru.practicum.shareit.requests.dto.ItemRequestDto;
 import ru.practicum.shareit.requests.model.ItemRequest;
 import ru.practicum.shareit.user.service.UserServiceImpl;

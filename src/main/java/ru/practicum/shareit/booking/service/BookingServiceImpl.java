@@ -2,7 +2,6 @@ package ru.practicum.shareit.booking.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,6 @@ import ru.practicum.shareit.user.service.UserServiceImpl;
 import javax.validation.ValidationException;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import static ru.practicum.shareit.booking.dto.BookingMapper.toBookingDto;
@@ -31,7 +29,6 @@ import static ru.practicum.shareit.booking.model.Status.*;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-
 @Transactional
 public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepository;

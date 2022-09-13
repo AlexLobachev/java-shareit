@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
-import ru.practicum.shareit.requests.ItemRequestRepository;
 import ru.practicum.shareit.requests.dto.ItemRequestDto;
 import ru.practicum.shareit.requests.model.ItemRequest;
 import ru.practicum.shareit.user.model.User;
@@ -20,13 +18,13 @@ import static org.hamcrest.Matchers.equalTo;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
-@TestPropertySource(properties = {"db.shareit"})
+
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 class RequestServiceImplTest {
 
     private final RequestServiceImpl requestServiceImpl;
     private final UserServiceImpl userServiceImpl;
-    private final ItemRequestRepository itemRequestController;
+
 
     @Test
     void addRequest() {
@@ -45,9 +43,11 @@ class RequestServiceImplTest {
 
     @Test
     void getAllRequest() {
+
         userServiceImpl.addUser(new User(1L, "Robin", "Robin@mail.ru"));
         userServiceImpl.addUser(new User(2L, "Robin", "Robin@mail.ru"));
         requestServiceImpl.addRequest(new ItemRequest(1L, "Нужно что то", null, LocalDateTime.now()), 1L);
+
         List<ItemRequestDto> itemRequestDtos = requestServiceImpl.getAllRequest(0, 20, 2L);
         assertThat(itemRequestDtos.get(0).getDescription(), equalTo("Нужно что то"));
     }

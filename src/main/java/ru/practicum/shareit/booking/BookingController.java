@@ -6,10 +6,8 @@ import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.dto.BookingRequest;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.service.BookingServiceImpl;
-import ru.practicum.shareit.item.model.Item;
 
 import java.util.List;
-import java.util.Map;
 
 import static ru.practicum.shareit.booking.dto.BookingMapper.toBookingDto;
 import static ru.practicum.shareit.booking.dto.BookingMapper.toBookingRequest;

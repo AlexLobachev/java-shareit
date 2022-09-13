@@ -15,7 +15,6 @@ import ru.practicum.shareit.item.dto.ItemBookingDto;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.model.Comments;
 import ru.practicum.shareit.item.model.Item;
-import ru.practicum.shareit.requests.ItemRequestRepository;
 import ru.practicum.shareit.user.service.UserServiceImpl;
 
 import javax.transaction.Transactional;

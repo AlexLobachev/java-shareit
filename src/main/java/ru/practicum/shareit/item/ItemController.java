@@ -7,7 +7,6 @@ import ru.practicum.shareit.exсeption.NullAllowed;
 import ru.practicum.shareit.item.dto.ItemBookingDto;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.dto.ItemMapper;
-import ru.practicum.shareit.item.dto.RequestItemDto;
 import ru.practicum.shareit.item.model.Comments;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.servise.ItemServiceImpl;
@@ -27,17 +26,17 @@ public class ItemController {
 
     @PostMapping
     public ItemDto addItem(@Validated(NullAllowed.class)
-                        @RequestBody Item item,
-                        @RequestHeader("X-Sharer-User-Id") Long idOwner) {
+                           @RequestBody Item item,
+                           @RequestHeader("X-Sharer-User-Id") Long idOwner) {
         return itemServiceImpl.addItem(item, idOwner);
     }
 
     @PostMapping(value = "{id}/comment")
     public Comments addComment(
-                        @PathVariable Long id,
-                        @RequestHeader("X-Sharer-User-Id") Long idOwner,
-                        @RequestBody Comments comments) {
-        return itemServiceImpl.addComment(id, idOwner,comments);
+            @PathVariable Long id,
+            @RequestHeader("X-Sharer-User-Id") Long idOwner,
+            @RequestBody Comments comments) {
+        return itemServiceImpl.addComment(id, idOwner, comments);
     }
 
     @PatchMapping(value = "{id}")
@@ -49,12 +48,9 @@ public class ItemController {
     }
 
     @GetMapping(value = "{id}")
-    public ItemBookingDto getItem(@PathVariable Long id,@RequestHeader("X-Sharer-User-Id") Long userId) {
-        return itemServiceImpl.getItem(id,userId);
+    public ItemBookingDto getItem(@PathVariable Long id, @RequestHeader("X-Sharer-User-Id") Long userId) {
+        return itemServiceImpl.getItem(id, userId);
     }
-
-
-
 
     @GetMapping
     public List<ItemBookingDto> getItemsUser(@RequestHeader("X-Sharer-User-Id") Long idOwner) {
@@ -67,7 +63,5 @@ public class ItemController {
                 .map(ItemMapper::toItemDto)
                 .collect(Collectors.toList());
     }
-
-
 
 }

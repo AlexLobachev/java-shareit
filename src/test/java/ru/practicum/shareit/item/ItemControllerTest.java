@@ -25,6 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = ItemController.class)
+
 class ItemControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
@@ -42,6 +43,7 @@ class ItemControllerTest {
 
     @Test
     void addItem() throws Exception {
+        System.out.println("НАЧАЛО");
         ItemDto itemDto = itemDto(item);
         when(itemServiceImpl.addItem(any(), anyLong()))
                 .thenReturn(itemDto);
@@ -57,6 +59,7 @@ class ItemControllerTest {
                 .andExpect(jsonPath("$.id", is(item.getId()), Long.class))
                 .andExpect(jsonPath("$.name", is(item.getName())))
                 .andExpect(jsonPath("$.description", is(item.getDescription())));
+
     }
 
 
@@ -132,7 +135,9 @@ class ItemControllerTest {
         itemBookingDto.setName(item.getName());
         itemBookingDto.setDescription(item.getDescription());
         itemBookingDto.setAvailable(item.getAvailable());
+        System.out.println("КОНЕЦ");
         return itemBookingDto;
+
     }
 
 

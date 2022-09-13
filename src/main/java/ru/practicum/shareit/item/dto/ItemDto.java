@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.practicum.shareit.exсeption.NullAllowed;
-import ru.practicum.shareit.requests.model.ItemRequest;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

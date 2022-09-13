@@ -1,15 +1,11 @@
 package ru.practicum.shareit.requests.model;
 
 import lombok.*;
-import ru.practicum.shareit.item.model.Item;
-import ru.practicum.shareit.requests.dto.ItemRequestDto;
 import ru.practicum.shareit.user.model.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Table(name = "requests")
