@@ -29,10 +29,10 @@ class BookingRepositoryTest {
     @Autowired
     private ItemRepository itemRepository;
     private Booking booking;
-
+    private User user;
     @BeforeEach
     void beforeEach() {
-        User user = new User();
+        user = new User();
         user.setEmail("demo-user@email.com");
         user.setName("demo");
         userRepository.save(user);
@@ -65,7 +65,7 @@ class BookingRepositoryTest {
 
     @Test
     void findByUserPast() {
-        List<Booking> bookings = bookingRepository.findByOrderPast(booking.getId(), LocalDateTime.now().plusSeconds(10));
+        List<Booking> bookings = bookingRepository.findByOrderPast(user.getId(), LocalDateTime.now().plusSeconds(10));
         Assertions.assertNotNull(bookings);
     }
 
