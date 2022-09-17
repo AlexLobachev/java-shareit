@@ -25,18 +25,18 @@ public class ItemController {
     private ItemServiceImpl itemServiceImpl;
 
     @PostMapping
-    public Item addItem(@Validated(NullAllowed.class)
-                        @RequestBody Item item,
-                        @RequestHeader("X-Sharer-User-Id") Long idOwner) {
+    public ItemDto addItem(@Validated(NullAllowed.class)
+                           @RequestBody Item item,
+                           @RequestHeader("X-Sharer-User-Id") Long idOwner) {
         return itemServiceImpl.addItem(item, idOwner);
     }
 
     @PostMapping(value = "{id}/comment")
     public Comments addComment(
-                        @PathVariable Long id,
-                        @RequestHeader("X-Sharer-User-Id") Long idOwner,
-                        @RequestBody Comments comments) {
-        return itemServiceImpl.addComment(id, idOwner,comments);
+            @PathVariable Long id,
+            @RequestHeader("X-Sharer-User-Id") Long idOwner,
+            @RequestBody Comments comments) {
+        return itemServiceImpl.addComment(id, idOwner, comments);
     }
 
     @PatchMapping(value = "{id}")
@@ -48,12 +48,9 @@ public class ItemController {
     }
 
     @GetMapping(value = "{id}")
-    public ItemBookingDto getItem(@PathVariable Long id,@RequestHeader("X-Sharer-User-Id") Long userId) {
-        return itemServiceImpl.getItem(id,userId);
+    public ItemBookingDto getItem(@PathVariable Long id, @RequestHeader("X-Sharer-User-Id") Long userId) {
+        return itemServiceImpl.getItem(id, userId);
     }
-
-
-
 
     @GetMapping
     public List<ItemBookingDto> getItemsUser(@RequestHeader("X-Sharer-User-Id") Long idOwner) {
@@ -66,7 +63,5 @@ public class ItemController {
                 .map(ItemMapper::toItemDto)
                 .collect(Collectors.toList());
     }
-
-
 
 }

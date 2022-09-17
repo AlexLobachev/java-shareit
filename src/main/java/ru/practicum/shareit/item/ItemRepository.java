@@ -8,7 +8,7 @@ import ru.practicum.shareit.item.model.Item;
 
 import java.util.List;
 
-public interface ItemRepository extends JpaRepository <Item,Long> {
+public interface ItemRepository extends JpaRepository<Item, Long> {
     @Modifying(clearAutomatically = true)
     @Query("update Item i set i.name = ?1, i.description = ?2, i.available = ?3 where i.id = ?4")
     void updateItemByAll(String name, String description, Boolean available, Long itemId);
@@ -30,5 +30,7 @@ public interface ItemRepository extends JpaRepository <Item,Long> {
     @Query("SELECT i FROM Item i WHERE lower (i.description)  like  %:description% AND i.available = true")
     List<Item> findAllByName(@Param("description") String description);
 
+    List<Item> findAllByRequestId(Long userId);
 
+    List<Item> findAllByRequestIdNotNull();
 }

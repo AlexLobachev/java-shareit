@@ -12,6 +12,7 @@ import ru.practicum.shareit.item.ItemValidator;
 import ru.practicum.shareit.item.dto.CommentsDto;
 import ru.practicum.shareit.item.dto.CommentsMapper;
 import ru.practicum.shareit.item.dto.ItemBookingDto;
+import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.model.Comments;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.user.service.UserServiceImpl;
@@ -24,21 +25,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static ru.practicum.shareit.item.dto.ItemMapper.toItemBookingDto;
+import static ru.practicum.shareit.item.dto.ItemMapper.toItemDto;
 
 @RequiredArgsConstructor
 @Service
 @Slf4j
 @Transactional
-public class ItemServiceImpl implements ItemService {
+public class ItemServiceImpl /*implements ItemService*/ {
     private final UserServiceImpl userService;
     private final ItemRepository itemRepository;
     private final BookingRepository bookingRepository;
     private final ItemValidator itemValidator;
     private final CommentsRepository commentsRepository;
 
-    public Item addItem(Item item, Long idOwner) {
+
+    public ItemDto addItem(Item item, Long idOwner) {
         item.setOwner(userService.getUser(idOwner));
-        return itemRepository.save(item);
+        itemRepository.save(item);
+        return toItemDto(itemRepository.findById(item.getId()).orElse(new Item()));
     }
 
     public Item updateItem(Long id, Item item, Long idOwner) {

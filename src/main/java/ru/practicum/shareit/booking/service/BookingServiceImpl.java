@@ -2,6 +2,8 @@ package ru.practicum.shareit.booking.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.booking.BookingRepository;
@@ -13,6 +15,7 @@ import ru.practicum.shareit.exсeption.ExceptionNotFoundUser;
 import ru.practicum.shareit.item.ItemRepository;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.servise.ItemServiceImpl;
+import ru.practicum.shareit.requests.OffsetLimitPageable;
 import ru.practicum.shareit.user.service.UserServiceImpl;
 
 import javax.validation.ValidationException;
@@ -27,7 +30,7 @@ import static ru.practicum.shareit.booking.model.Status.*;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class BookingServiceImpl /*implements BookingService*/ {
+public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepository;
     private final ItemRepository itemRepository;
     private final ItemServiceImpl itemServiceImpl;
@@ -56,10 +59,10 @@ public class BookingServiceImpl /*implements BookingService*/ {
         return validator.checkGetBookerAndUser(toBookingDto((bookingRepository.findById(id).orElse(new Booking()))), ownerId);
     }
 
-    public List<BookingDto> getBookingByOwnerAll(Long ownerId, String state) {
+    public List<BookingDto> getBookingByOwnerAll(Long ownerId, String state, Integer from, Integer size) {
         userServiceImpl.getUser(ownerId);
         itemServiceImpl.getItemsUser(ownerId);
-
+        Pageable pageable = OffsetLimitPageable.of(from, size);
         switch (state) {
             case ("FUTURE"):
                 return bookingRepository.findByStatusNotAndStatusNotOrderByIdDesc(REJECTED, CANCELED).stream().filter(x -> x.getItem().getOwner().getId().equals(ownerId)).map(BookingMapper::toBookingDto).collect(Collectors.toList());
@@ -71,7 +74,7 @@ public class BookingServiceImpl /*implements BookingService*/ {
 
                 return bookingRepository.findByOrderPast(ownerId, LocalDateTime.now()).stream().map(BookingMapper::toBookingDto).collect(Collectors.toList());
             case ("ALL"):
-                return bookingRepository.findAllByOrderByIdDesc().stream().filter(x -> x.getItem().getOwner().getId().equals(ownerId)).map(BookingMapper::toBookingDto).collect(Collectors.toList());
+                return bookingRepository.findAllByOrderByIdDesc(ownerId,pageable).stream().filter(x -> x.getItem().getOwner().getId().equals(ownerId)).map(BookingMapper::toBookingDto).collect(Collectors.toList());
             case ("WAITING"):
                 return bookingRepository.findByStatusOrderByIdDesc(WAITING).stream().filter(x -> x.getItem().getOwner().getId().equals(ownerId)).map(BookingMapper::toBookingDto).collect(Collectors.toList());
             default:
@@ -79,8 +82,9 @@ public class BookingServiceImpl /*implements BookingService*/ {
         }
     }
 
-    public List<BookingDto> getBookingByUserAll(String state, Long userId) {
+    public List<BookingDto> getBookingByUserAll(String state, Long userId, Integer from,Integer size) {
         userServiceImpl.getUser(userId);
+        Pageable pageable = OffsetLimitPageable.of(from, size, Sort.by("id"));
         switch (state) {
             case ("FUTURE"):
                 return bookingRepository.findByStatusNotAndStatusNotOrderByIdDesc(REJECTED, CANCELED).stream().map(BookingMapper::toBookingDto).collect(Collectors.toList());
@@ -91,7 +95,7 @@ public class BookingServiceImpl /*implements BookingService*/ {
             case ("PAST"):
                 return bookingRepository.findByUserPast(userId, LocalDateTime.now()).stream().map(BookingMapper::toBookingDto).collect(Collectors.toList());
             case ("ALL"):
-                return bookingRepository.findByBooker_idOrderByIdDesc(userId).stream().map(BookingMapper::toBookingDto).collect(Collectors.toList());
+                return bookingRepository.findByBooker_idOrderByIdDesc(userId, pageable).stream().map(BookingMapper::toBookingDto).collect(Collectors.toList());
             case ("WAITING"):
                 return bookingRepository.findAllByBooker_IdAndStatusOrderByIdDesc(userId, WAITING).stream().map(BookingMapper::toBookingDto).collect(Collectors.toList());
             default:

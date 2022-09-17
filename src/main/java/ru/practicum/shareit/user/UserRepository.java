@@ -18,5 +18,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("update User u set u.name = ?1 where u.id = ?2")
     void updateUserByName(String name, Long userId);
 
-
 }

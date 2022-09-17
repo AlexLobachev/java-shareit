@@ -9,7 +9,8 @@ import ru.practicum.shareit.exсeption.ExceptionNotFoundUser;
 import ru.practicum.shareit.exсeption.ExclusionInvalidRequest;
 import ru.practicum.shareit.item.servise.ItemServiceImpl;
 
-import static ru.practicum.shareit.booking.model.Status.*;
+import static ru.practicum.shareit.booking.model.Status.APPROVED;
+import static ru.practicum.shareit.booking.model.Status.REJECTED;
 
 @AllArgsConstructor
 @Service

@@ -15,6 +15,8 @@ public class ItemMapper {
         itemDto.setName(item.getName());
         itemDto.setDescription(item.getDescription());
         itemDto.setAvailable(item.getAvailable());
+        itemDto.setRequestId(item.getRequestId());
+
         return itemDto;
     }
 
@@ -25,6 +27,7 @@ public class ItemMapper {
     public static ItemBookingDto toItemBookingDto(Item item, List<Booking> bookings, List<CommentsDto> comments, Long userId) {
 
         ItemBookingDto itemBookingDto = new ItemBookingDto();
+
         itemBookingDto.setId(item.getId());
         itemBookingDto.setName(item.getName());
         itemBookingDto.setDescription(item.getDescription());
