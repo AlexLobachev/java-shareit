@@ -1,4 +1,4 @@
-package ru.practicum.shareit.exсeptions;
+package ru.practicum.shareit.exception;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
