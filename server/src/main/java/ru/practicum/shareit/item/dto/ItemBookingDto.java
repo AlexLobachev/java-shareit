@@ -9,14 +9,14 @@ import java.util.List;
 
 @Data
 public class ItemBookingDto {
-        private Long id;
-        private String name;
-        private String description;
-        private Boolean available;
-        private LastBooking lastBooking;
-        private NextBooking nextBooking;
-        private List<CommentsDto> comments;
-        private User owner;
-    }
+    private Long id;
+    private String name;
+    private String description;
+    private Boolean available;
+    private LastBooking lastBooking;
+    private NextBooking nextBooking;
+    private List<CommentsDto> comments;
+    private User owner;
+}
 
 

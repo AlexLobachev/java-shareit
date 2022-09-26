@@ -8,9 +8,7 @@ import java.util.List;
 public interface BookingService {
     Booking bookingRequest(Booking booking, Long id, Long itemId);
 
-
     Booking confirmOrRejectBooking(Long bookingId, Boolean status, Long ownerId);
-
 
     BookingDto getBookingByOwner(Long id, Long ownerId);
 

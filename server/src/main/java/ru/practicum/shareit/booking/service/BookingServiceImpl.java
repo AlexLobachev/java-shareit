@@ -37,10 +37,11 @@ public class BookingServiceImpl implements BookingService {
     private final ItemServiceImpl itemServiceImpl;
     private final UserServiceImpl userServiceImpl;
     private final BookingValidator validator;
+
     public Booking bookingRequest(Booking booking, Long userId, Long itemId) {
         booking.setBooker(userServiceImpl.getUser(userId));
         booking.setItem(itemRepository.findById(itemId).orElse(new Item()));
-        validator.checkPost(booking,itemId);
+        validator.checkPost(booking, itemId);
         return bookingRepository.save(booking);
     }
 
@@ -74,7 +75,7 @@ public class BookingServiceImpl implements BookingService {
 
                 return bookingRepository.findByOrderPast(ownerId, LocalDateTime.now()).stream().map(BookingMapper::toBookingDto).collect(Collectors.toList());
             case ("ALL"):
-                return bookingRepository.findAllByOrderByIdDesc(ownerId,pageable).stream().filter(x -> x.getItem().getOwner().getId().equals(ownerId)).map(BookingMapper::toBookingDto).collect(Collectors.toList());
+                return bookingRepository.findAllByOrderByIdDesc(ownerId, pageable).stream().filter(x -> x.getItem().getOwner().getId().equals(ownerId)).map(BookingMapper::toBookingDto).collect(Collectors.toList());
             case ("WAITING"):
                 return bookingRepository.findByStatusOrderByIdDesc(WAITING).stream().filter(x -> x.getItem().getOwner().getId().equals(ownerId)).map(BookingMapper::toBookingDto).collect(Collectors.toList());
             default:
@@ -82,7 +83,7 @@ public class BookingServiceImpl implements BookingService {
         }
     }
 
-    public List<BookingDto> getBookingByUserAll(String state, Long userId, Integer from,Integer size) {
+    public List<BookingDto> getBookingByUserAll(String state, Long userId, Integer from, Integer size) {
         userServiceImpl.getUser(userId);
         Pageable pageable = OffsetLimitPageable.of(from, size, Sort.by("id"));
         switch (state) {
@@ -102,7 +103,8 @@ public class BookingServiceImpl implements BookingService {
                 throw new ValidationException("Unknown state: " + state);
         }
     }
-    public void deleteAll(){
+
+    public void deleteAll() {
         bookingRepository.deleteAll();
     }
 

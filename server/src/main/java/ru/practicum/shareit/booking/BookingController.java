@@ -43,8 +43,7 @@ public class BookingController {
     public List<BookingDto> getBookingByOwnerAll(@RequestParam(defaultValue = "ALL") String state,
                                                  @RequestHeader("X-Sharer-User-Id") Long ownerId,
                                                  @RequestParam(defaultValue = "0") Integer from,
-                                                 @RequestParam(defaultValue = "99999") Integer size)
-    {
+                                                 @RequestParam(defaultValue = "99999") Integer size) {
 
         return bookingServiceImpl.getBookingByOwnerAll(ownerId, state, from, size);
     }
@@ -56,7 +55,7 @@ public class BookingController {
                                                 @RequestParam(defaultValue = "99999") Integer size,
                                                 @RequestHeader("X-Sharer-User-Id") Long userId) {
 
-        return bookingServiceImpl.getBookingByUserAll(state, userId,from,size);
+        return bookingServiceImpl.getBookingByUserAll(state, userId, from, size);
     }
 
 

@@ -8,7 +8,6 @@ import javax.validation.ValidationException;
 import java.util.Optional;
 
 
-
 public class OffsetLimitPageable implements Pageable {
     private final int offset;
     private final int limit;
@@ -49,7 +48,6 @@ public class OffsetLimitPageable implements Pageable {
     public static int saveUnboxing(Integer value) {
         return Optional.ofNullable(value).orElse(0);
     }
-
 
 
     @Override

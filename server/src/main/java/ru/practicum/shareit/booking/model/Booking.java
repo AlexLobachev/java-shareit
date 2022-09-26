@@ -34,6 +34,7 @@ public class Booking {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status = Status.WAITING;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

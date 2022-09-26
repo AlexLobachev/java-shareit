@@ -16,19 +16,20 @@ import static ru.practicum.shareit.booking.model.Status.REJECTED;
 @Service
 public class BookingValidator {
     private ItemServiceImpl itemServiceImpl;
-    public void checkPost(Booking booking,Long itemId) {
 
-        if (!itemServiceImpl.getItem(itemId,booking.getBooker().getId()).getAvailable()) {
+    public void checkPost(Booking booking, Long itemId) {
+
+        if (!itemServiceImpl.getItem(itemId, booking.getBooker().getId()).getAvailable()) {
             throw new ExclusionInvalidRequest("Вещь недоступна для бронирования");
         }
-        if (itemServiceImpl.getItem(itemId,booking.getBooker().getId()).getOwner().getId().equals(booking.getBooker().getId())){
+        if (itemServiceImpl.getItem(itemId, booking.getBooker().getId()).getOwner().getId().equals(booking.getBooker().getId())) {
             throw new ExceptionNotFoundUser("Пользователь не может бронировать свои вещи");
         }
     }
 
-    public BookingDto checkGetBookerAndUser(BookingDto bookingDto, Long ownerId){
-        if(bookingDto.getId()!=null&&(bookingDto.getBooker().getId().equals(ownerId))||
-                (itemServiceImpl.getItem(bookingDto.getItem().getId(),bookingDto.getBooker().getId()).getOwner().getId().equals(ownerId))){
+    public BookingDto checkGetBookerAndUser(BookingDto bookingDto, Long ownerId) {
+        if (bookingDto.getId() != null && (bookingDto.getBooker().getId().equals(ownerId)) ||
+                (itemServiceImpl.getItem(bookingDto.getItem().getId(), bookingDto.getBooker().getId()).getOwner().getId().equals(ownerId))) {
             return bookingDto;
         }
         throw new ExceptionNotFoundUser("Только владелец или автор бронирования могут запрашивать вещь!");
@@ -41,11 +42,12 @@ public class BookingValidator {
         }
         return REJECTED;
     }
-    public void checkIdOwnerAndStatus(Booking booking, Long ownerId){
-        if (!booking.getItem().getOwner().getId().equals(ownerId)){
+
+    public void checkIdOwnerAndStatus(Booking booking, Long ownerId) {
+        if (!booking.getItem().getOwner().getId().equals(ownerId)) {
             throw new ExceptionNotFoundUser("Только владелец может подтвердить бронирование");
         }
-        if(booking.getStatus()==APPROVED){
+        if (booking.getStatus() == APPROVED) {
             throw new ExclusionInvalidRequest("Статус уже установлен");
         }
     }

@@ -23,7 +23,6 @@ public class RequestServiceImpl implements RequestService {
     private final ItemRepository itemRepository;
 
 
-
     public ItemRequest addRequest(ItemRequest request, Long userId) {
         request.setRequestor(userService.getUser(userId));
         return itemRequestRepository.save(request);
@@ -31,19 +30,19 @@ public class RequestServiceImpl implements RequestService {
 
     public List<ItemRequestDto> getRequest(Long userId) {
         userService.getUser(userId);
-        return  toRequestDto(itemRequestRepository.findAllByRequestorId(userId),itemRepository.findAllByRequestId(userId));//!!!Переделать по человечески
+        return toRequestDto(itemRequestRepository.findAllByRequestorId(userId), itemRepository.findAllByRequestId(userId));//!!!Переделать по человечески
 
     }
 
     public List<ItemRequestDto> getAllRequest(Integer from, Integer size, Long userId) {
         userService.getUser(userId);
         Pageable pageable = OffsetLimitPageable.of(from, size);
-        return toRequestDto(itemRequestRepository.findAllByRequestorIdNot(userId,pageable),itemRepository.findAllByRequestIdNotNull());
+        return toRequestDto(itemRequestRepository.findAllByRequestorIdNot(userId, pageable), itemRepository.findAllByRequestIdNotNull());
     }
 
     public ItemRequestDto getRequestById(Long requestId, Long userId) {
         userService.getUser(userId);
         userService.getUser(requestId);
-        return toRequestDto(itemRequestRepository.findAllById(requestId),itemRepository.findAllByRequestId(requestId)).get(0);
+        return toRequestDto(itemRequestRepository.findAllById(requestId), itemRepository.findAllByRequestId(requestId)).get(0);
     }
 }

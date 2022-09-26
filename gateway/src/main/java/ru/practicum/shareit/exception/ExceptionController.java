@@ -11,7 +11,7 @@ import java.util.Map;
 @RestControllerAdvice("ru.practicum.shareit")
 public class ExceptionController {
 
-    @ExceptionHandler({ValidationException.class,ExclusionInvalidRequest.class})
+    @ExceptionHandler({ValidationException.class, ExclusionInvalidRequest.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> errorException(final RuntimeException e) {
 

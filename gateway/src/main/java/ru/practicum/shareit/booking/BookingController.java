@@ -47,11 +47,11 @@ public class BookingController {
     @GetMapping(value = "/owner")
     public ResponseEntity<Object> getBookingByOwnerAll(@RequestParam(defaultValue = "ALL") String state,
                                                        @RequestHeader("X-Sharer-User-Id") Long ownerId,
-                                                       @PositiveOrZero  @RequestParam(defaultValue = "0") Integer from,
+                                                       @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
                                                        @Positive @RequestParam(defaultValue = "99999") Integer size) {
         BookingState stateParam = BookingState.from(state)
                 .orElseThrow(() -> new ValidationException("Unknown state: " + state));
-        return bookingClient.getBookingByOwnerAll(stateParam ,ownerId, from, size);
+        return bookingClient.getBookingByOwnerAll(stateParam, ownerId, from, size);
     }
 
 
@@ -62,7 +62,7 @@ public class BookingController {
                                                       @Positive @RequestHeader("X-Sharer-User-Id") Long userId) {
         BookingState stateParam = BookingState.from(state)
                 .orElseThrow(() -> new ValidationException("Unknown state: " + state));
-        return bookingClient.getBookingByUserAll(stateParam ,userId, from, size);
+        return bookingClient.getBookingByUserAll(stateParam, userId, from, size);
 
     }
 

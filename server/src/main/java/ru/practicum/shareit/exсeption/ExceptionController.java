@@ -15,7 +15,7 @@ import java.util.Objects;
 @RestControllerAdvice("ru.practicum.shareit")
 public class ExceptionController {
 
-    @ExceptionHandler({ValidationException.class, ExclusionInvalidRequest.class,MethodArgumentTypeMismatchException.class})
+    @ExceptionHandler({ValidationException.class, ExclusionInvalidRequest.class, MethodArgumentTypeMismatchException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> errorException(final RuntimeException e) {
 
@@ -43,6 +43,7 @@ public class ExceptionController {
         return Map.of("ERROR", "ОШИБКА ВВОДА",
                 "errorMessage", "Пользователь не существует");
     }
+
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Map<String, String> errorException(final DataIntegrityViolationException e) {

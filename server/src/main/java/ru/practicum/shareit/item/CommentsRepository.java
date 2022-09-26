@@ -5,6 +5,6 @@ import ru.practicum.shareit.item.model.Comments;
 
 import java.util.List;
 
-public interface CommentsRepository extends JpaRepository<Comments,Long> {
-        List<Comments> findAllByItem_Id(Long id);
+public interface CommentsRepository extends JpaRepository<Comments, Long> {
+    List<Comments> findAllByItem_Id(Long id);
 }

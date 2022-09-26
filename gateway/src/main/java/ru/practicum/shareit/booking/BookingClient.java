@@ -30,10 +30,10 @@ public class BookingClient extends BaseClient {
     }
 
     public ResponseEntity<Object> bookingRequest(BookingDto booking, Long userId, Long itemId) {
-        if (booking.getStart().isAfter(booking.getEnd())){
+        if (booking.getStart().isAfter(booking.getEnd())) {
             throw new ExclusionInvalidRequest("Время окончания не может быть раньше времени старта");
         }
-        return post("", userId,booking);
+        return post("", userId, booking);
     }
 
 
@@ -41,12 +41,12 @@ public class BookingClient extends BaseClient {
         Map<String, Object> parameters = Map.of(
                 "approved", approved
         );
-        return patch("/"+bookingId+"?approved={approved}",ownerId,parameters);
+        return patch("/" + bookingId + "?approved={approved}", ownerId, parameters);
     }
 
 
     public ResponseEntity<Object> getBookingByOwner(Long id, Long ownerId) {
-        return get("/"+id,ownerId);
+        return get("/" + id, ownerId);
     }
 
     public ResponseEntity<Object> getBookingByOwnerAll(BookingState state, Long ownerId, Integer from, Integer size) {

@@ -27,11 +27,11 @@ public class RequestsClient extends BaseClient {
     }
 
     public ResponseEntity<Object> addRequest(ItemRequestDto requestDto, Long userId) {
-        return post("",userId,requestDto);
+        return post("", userId, requestDto);
     }
 
     public ResponseEntity<Object> getRequest(Long userId) {
-        return  get("",userId);
+        return get("", userId);
 
     }
 
@@ -40,10 +40,10 @@ public class RequestsClient extends BaseClient {
                 "from", from,
                 "size", size
         );
-        return get("/all?from{from}&size{size}",userId,parameters);
+        return get("/all?from{from}&size{size}", userId, parameters);
     }
 
     public ResponseEntity<Object> getRequestById(Long requestId, Long userId) {
-        return get("/"+requestId,userId);
+        return get("/" + requestId, userId);
     }
 }

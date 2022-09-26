@@ -27,26 +27,30 @@ public class ItemClient extends BaseClient {
         );
         this.userClient = userClient;
     }
+
     public ResponseEntity<Object> addItem(ItemDto itemDto, Long idOwner) {
         userClient.getUser(idOwner);
-        return post("",idOwner,itemDto);
+        return post("", idOwner, itemDto);
     }
+
     public ResponseEntity<Object> updateItem(Long id, ItemDto itemDto, Long idOwner) {
-        return patch("/"+id,idOwner,itemDto);
+        return patch("/" + id, idOwner, itemDto);
     }
+
     public ResponseEntity<Object> getItem(Long id, Long userId) {
-        return get("/"+id,userId);
+        return get("/" + id, userId);
     }
+
     public ResponseEntity<Object> getItemsUser(Long idOwner) {
-        return get("",idOwner);
+        return get("", idOwner);
     }
 
     public ResponseEntity<Object> getSearchName(String text) {
-        return get("/search?text="+text);
+        return get("/search?text=" + text);
     }
 
     public ResponseEntity<Object> addComment(Long id, Long idOwner, CommentsDto commentsDto) {
-        return post("/"+id+"/comment" , idOwner,commentsDto);
+        return post("/" + id + "/comment", idOwner, commentsDto);
     }
 
 }

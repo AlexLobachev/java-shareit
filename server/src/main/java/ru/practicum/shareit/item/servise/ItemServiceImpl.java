@@ -83,13 +83,13 @@ public class ItemServiceImpl /*implements ItemService*/ {
     }
 
     public Comments addComment(Long id, Long idOwner, Comments comments) {
-        itemValidator.checkComment(id,idOwner);
+        itemValidator.checkComment(id, idOwner);
         comments.setAuthorName(userService.getUser(idOwner).getName());
         comments.setItem(itemRepository.findById(id).orElse(new Item()));
         return commentsRepository.save(comments);
     }
 
-    public void deleteItem(){
+    public void deleteItem() {
         itemRepository.deleteAll();
     }
 
