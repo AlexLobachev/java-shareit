@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.model.Status;
-import ru.practicum.shareit.exсeption.ExceptionNotFoundUser;
-import ru.practicum.shareit.exсeption.ExclusionInvalidRequest;
+import ru.practicum.shareit.exсeptions.ExceptionNotFoundUser;
+import ru.practicum.shareit.exсeptions.ExclusionInvalidRequest;
 import ru.practicum.shareit.item.servise.ItemServiceImpl;
 
 import static ru.practicum.shareit.booking.model.Status.APPROVED;

@@ -1,4 +1,4 @@
-package ru.practicum.shareit.exсeption;
+package ru.practicum.shareit.exсeptions;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -49,5 +49,4 @@ public class ExceptionController {
     public Map<String, String> errorException(final DataIntegrityViolationException e) {
         return Map.of("error", Objects.requireNonNull(e.getMessage()));
     }
-
 }

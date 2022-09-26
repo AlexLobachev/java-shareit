@@ -3,8 +3,8 @@ package ru.practicum.shareit.item;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.booking.BookingRepository;
-import ru.practicum.shareit.exсeption.ExceptionNotFoundUser;
-import ru.practicum.shareit.exсeption.ExclusionInvalidRequest;
+import ru.practicum.shareit.exсeptions.ExceptionNotFoundUser;
+import ru.practicum.shareit.exсeptions.ExclusionInvalidRequest;
 
 import java.time.LocalDateTime;
 
