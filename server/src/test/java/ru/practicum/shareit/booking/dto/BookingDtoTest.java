@@ -19,10 +19,7 @@ class BookingDtoTest {
     void bookingDto() throws IOException {
         BookingDto bookingDto = new BookingDto();
         bookingDto.setId(1L);
-
         JsonContent<BookingDto> result = json.write(bookingDto);
-
         assertThat(result).extractingJsonPathNumberValue("$.id").isEqualTo(1);
-
     }
 }

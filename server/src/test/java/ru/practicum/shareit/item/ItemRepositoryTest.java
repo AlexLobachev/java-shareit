@@ -32,10 +32,8 @@ class ItemRepositoryTest {
         itemRepository.save(item);
         itemRepository.updateItemByAll("demo2", "demoDescription2", false, item.getId());
         item = itemRepository.findById(item.getId()).orElse(new Item());
-
         Assertions.assertEquals(item.getName(), "demo2");
         Assertions.assertEquals(item.getDescription(), "demoDescription2");
-
     }
 
     @Test

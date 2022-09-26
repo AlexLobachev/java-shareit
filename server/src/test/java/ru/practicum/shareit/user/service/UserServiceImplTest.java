@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
-import ru.practicum.shareit.exсeption.ExceptionNotFoundUser;
+import ru.practicum.shareit.exсeptions.ExceptionNotFoundUser;
 import ru.practicum.shareit.user.model.User;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -46,7 +46,6 @@ public class UserServiceImplTest {
         assertThat(user.getId(), notNullValue());
         assertThat(user.getName(), equalTo("Test"));
         assertThat(user.getEmail(), equalTo("Test@test.ru"));
-
 
         user.setName("Bobin");
         user.setEmail("Bobin@mail.ru");

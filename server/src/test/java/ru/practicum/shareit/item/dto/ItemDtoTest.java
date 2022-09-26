@@ -22,12 +22,9 @@ class ItemDtoTest {
         itemDto.setName("demo");
         itemDto.setDescription("demoDescription");
         itemDto.setAvailable(true);
-
         JsonContent<ItemDto> result = json.write(itemDto);
-
         assertThat(result).extractingJsonPathNumberValue("$.id").isEqualTo(1);
         assertThat(result).extractingJsonPathStringValue("$.name").isEqualTo("demo");
         assertThat(result).extractingJsonPathStringValue("$.description").isEqualTo("demoDescription");
     }
-
 }

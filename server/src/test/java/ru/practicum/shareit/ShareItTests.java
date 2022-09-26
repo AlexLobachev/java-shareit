@@ -11,7 +11,5 @@ import org.springframework.test.context.TestPropertySource;
 class ShareItTests {
     @Test
     void contextLoads() {
-
     }
-
 }

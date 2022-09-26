@@ -18,36 +18,29 @@ import static org.hamcrest.Matchers.equalTo;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
-
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 class RequestServiceImplTest {
-
     private final RequestServiceImpl requestServiceImpl;
     private final UserServiceImpl userServiceImpl;
-
 
     @Test
     void addRequest() {
         userServiceImpl.addUser(new User(1L, "Robin", "Robin@mail.ru"));
         ItemRequest itemRequest = requestServiceImpl.addRequest(new ItemRequest(1L, "Нужно что то", null, LocalDateTime.now()), 1L);
         assertThat(itemRequest.getDescription(), equalTo("Нужно что то"));
-
     }
 
     @Test
     void getRequest() {
         List<ItemRequestDto> itemRequestDtos = requestServiceImpl.getRequest(1L);
         assertThat(itemRequestDtos.get(0).getDescription(), equalTo("Нужно что то"));
-
     }
 
     @Test
     void getAllRequest() {
-
         userServiceImpl.addUser(new User(1L, "Robin", "Robin@mail.ru"));
         userServiceImpl.addUser(new User(2L, "Robin", "Robin@maill.ru"));
         requestServiceImpl.addRequest(new ItemRequest(1L, "Нужно что то", null, LocalDateTime.now()), 1L);
-
         List<ItemRequestDto> itemRequestDtos = requestServiceImpl.getAllRequest(0, 20, 2L);
         assertThat(itemRequestDtos.get(0).getDescription(), equalTo("Нужно что то"));
     }

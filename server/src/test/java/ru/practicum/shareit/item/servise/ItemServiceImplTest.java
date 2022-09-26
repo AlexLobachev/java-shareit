@@ -23,10 +23,7 @@ import static org.hamcrest.Matchers.notNullValue;
 @AutoConfigureTestDatabase
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 @TestPropertySource(properties = {"db.shareit"})
-
-public
-class ItemServiceImplTest {
-
+public class ItemServiceImplTest {
     private final ItemServiceImpl itemServiceImpl;
     private final UserServiceImpl userServiceImpl;
     private User user;
@@ -46,9 +43,7 @@ class ItemServiceImplTest {
 
     @Test
     void addItem() {
-
         userServiceImpl.addUser(user);
-
         ItemDto itemDto = itemServiceImpl.addItem(item, user.getId());
         assertThat(itemDto.getId(), notNullValue());
         assertThat(itemDto.getName(), equalTo("Hammer"));
@@ -56,20 +51,14 @@ class ItemServiceImplTest {
         assertThat(itemDto.getAvailable(), notNullValue());
         itemServiceImpl.deleteItem();
         userServiceImpl.deleteUser(user.getId());
-
     }
-
 
     @Test
     void getItemsUser() {
         userServiceImpl.addUser(user);
         itemServiceImpl.addItem(item, user.getId());
-
-
         List<ItemBookingDto> itemBookingDtos = itemServiceImpl.getItemsUser(user.getId());
-
         ItemBookingDto itemBookingDto = itemBookingDtos.get(0);
-
         assertThat(itemBookingDto.getName(), equalTo("Hammer"));
         itemServiceImpl.deleteItem();
         userServiceImpl.deleteUser(user.getId());
@@ -77,19 +66,14 @@ class ItemServiceImplTest {
 
     @Test
     void getSearchName() {
-        //User user = userServiceImpl.getUser(1L);
         userServiceImpl.addUser(user);
         itemServiceImpl.addItem(item, user.getId());
-
         List<Item> items = itemServiceImpl.getSearchName("description");
-
         ItemBookingDto itemBookingDto = itemBookingDto(items.get(0));
-
         assertThat(itemBookingDto.getDescription(), equalTo("description"));
         itemServiceImpl.deleteItem();
         userServiceImpl.deleteUser(user.getId());
     }
-
 
     @Test
     void updateItemAndGet() {
@@ -110,7 +94,6 @@ class ItemServiceImplTest {
         itemServiceImpl.deleteItem();
         userServiceImpl.deleteUser(user.getId());
     }
-
 
     private Item itemDto(ItemBookingDto itemBookingDto) {
         Item item = new Item();

@@ -42,16 +42,13 @@ class UserControllerTest {
         user.setId(1L);
         user.setName("Test");
         user.setEmail("Test@test.ru");
-
     }
 
     @Test
     void getAllUsers() throws Exception {
         users.add(user);
-
         when(userServiceImpl.getAllUsers())
                 .thenReturn(users);
-
         mockMvc.perform(get("/users")
                         .content(objectMapper.writeValueAsString(users))
                         .characterEncoding(StandardCharsets.UTF_8)
@@ -59,14 +56,12 @@ class UserControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(users)));
-
     }
 
     @Test
     void getUser() throws Exception {
         when(userServiceImpl.getUser(anyLong()))
                 .thenReturn(user);
-
         mockMvc.perform(get("/users/" + user.getId())
                         .content(objectMapper.writeValueAsString(user))
                         .characterEncoding(StandardCharsets.UTF_8)
@@ -75,17 +70,13 @@ class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(user.getId()), Long.class))
                 .andExpect(jsonPath("$.name", is(user.getName())))
-
                 .andExpect(jsonPath("$.email", is(user.getEmail())));
-
-
     }
 
     @Test
     void addUser() throws Exception {
         when(userServiceImpl.addUser(any()))
                 .thenReturn(user);
-
         mockMvc.perform(post("/users")
                         .content(objectMapper.writeValueAsString(user))
                         .characterEncoding(StandardCharsets.UTF_8)
@@ -97,6 +88,4 @@ class UserControllerTest {
 
                 .andExpect(jsonPath("$.email", is(user.getEmail())));
     }
-
-
 }

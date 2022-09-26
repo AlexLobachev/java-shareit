@@ -12,7 +12,6 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @JsonTest
 class UserDtoTest {
-
     @Autowired
     private JacksonTester<UserDto> json;
 
@@ -22,9 +21,7 @@ class UserDtoTest {
         userDto.setId(1L);
         userDto.setEmail("demo-user@email.com");
         userDto.setName("demo");
-
         JsonContent<UserDto> result = json.write(userDto);
-
         assertThat(result).extractingJsonPathNumberValue("$.id").isEqualTo(1);
         assertThat(result).extractingJsonPathStringValue("$.name").isEqualTo("demo");
         assertThat(result).extractingJsonPathStringValue("$.email").isEqualTo("demo-user@email.com");

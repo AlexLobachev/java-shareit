@@ -69,5 +69,4 @@ class BookingRepositoryTest {
         List<Booking> bookings = bookingRepository.findByUserPast(user.getId(), LocalDateTime.now().plusSeconds(10));
         Assertions.assertNotNull(bookings);
     }
-
 }

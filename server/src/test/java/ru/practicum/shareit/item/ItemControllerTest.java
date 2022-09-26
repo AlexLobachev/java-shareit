@@ -37,7 +37,6 @@ class ItemControllerTest {
     @BeforeEach
     void beforeEach() {
         item = new Item(1L, "Hammer", "Молоток", true, new User(), 1L);
-
     }
 
     @Test
@@ -45,7 +44,6 @@ class ItemControllerTest {
         ItemDto itemDto = itemDto(item);
         when(itemServiceImpl.addItem(any(), anyLong()))
                 .thenReturn(itemDto);
-
         mockMvc.perform(post("/items")
                         .content(objectMapper.writeValueAsString(itemDto))
                         .characterEncoding(StandardCharsets.UTF_8)
@@ -57,23 +55,18 @@ class ItemControllerTest {
                 .andExpect(jsonPath("$.id", is(item.getId()), Long.class))
                 .andExpect(jsonPath("$.name", is(item.getName())))
                 .andExpect(jsonPath("$.description", is(item.getDescription())));
-
     }
-
 
     @Test
     void updateItem() throws Exception {
-
         when(itemServiceImpl.updateItem(anyLong(), any(), anyLong()))
                 .thenReturn(item);
-
         mockMvc.perform(patch("/items/1")
                         .content(objectMapper.writeValueAsString(item))
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .header("X-Sharer-User-Id", 1))
-
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(item.getId()), Long.class))
                 .andExpect(jsonPath("$.name", is(item.getName())))
@@ -85,14 +78,12 @@ class ItemControllerTest {
         ItemBookingDto itemBookingDto = itemBookingDto(item);
         when(itemServiceImpl.getItem(anyLong(), anyLong()))
                 .thenReturn(itemBookingDto);
-
         mockMvc.perform(get("/items/1")
                         .content(objectMapper.writeValueAsString(itemBookingDto))
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .header("X-Sharer-User-Id", 1))
-
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(item.getId()), Long.class))
                 .andExpect(jsonPath("$.name", is(item.getName())))
@@ -104,18 +95,15 @@ class ItemControllerTest {
         List<ItemBookingDto> itemBookingDto = List.of(itemBookingDto(item));
         when(itemServiceImpl.getItemsUser(anyLong()))
                 .thenReturn(itemBookingDto);
-
         mockMvc.perform(get("/items")
                         .content(objectMapper.writeValueAsString(itemBookingDto))
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .header("X-Sharer-User-Id", 1))
-
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(itemBookingDto)));
     }
-
 
     private ItemDto itemDto(Item item) {
         ItemDto itemDto = new ItemDto();
@@ -134,8 +122,5 @@ class ItemControllerTest {
         itemBookingDto.setDescription(item.getDescription());
         itemBookingDto.setAvailable(item.getAvailable());
         return itemBookingDto;
-
     }
-
-
 }

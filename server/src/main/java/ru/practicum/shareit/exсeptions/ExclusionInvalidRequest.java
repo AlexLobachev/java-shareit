@@ -1,4 +1,4 @@
-package ru.practicum.shareit.exсeption;
+package ru.practicum.shareit.exсeptions;
 
 public class ExclusionInvalidRequest extends RuntimeException {
 

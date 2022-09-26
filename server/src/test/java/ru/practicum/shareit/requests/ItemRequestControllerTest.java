@@ -28,7 +28,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = ItemRequestController.class)
 class ItemRequestControllerTest {
-
     @Autowired
     private ObjectMapper objectMapper;
     @MockBean
@@ -44,17 +43,14 @@ class ItemRequestControllerTest {
 
     @Test
     void addRequest() throws Exception {
-
         when(requestServiceImpl.addRequest(any(), anyLong()))
                 .thenReturn(itemRequest);
-
         mockMvc.perform(post("/requests")
                         .content(objectMapper.writeValueAsString(itemRequest))
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .header("X-Sharer-User-Id", 1))
-
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(itemRequest.getId()), Long.class))
                 .andExpect(jsonPath("$.description", is(itemRequest.getDescription())));
@@ -66,32 +62,27 @@ class ItemRequestControllerTest {
         List<ItemRequestDto> itemRequestDtos = toRequestDto(itemRequests);
         when(requestServiceImpl.getRequest(anyLong()))
                 .thenReturn(itemRequestDtos);
-
         mockMvc.perform(get("/requests")
                         .content(objectMapper.writeValueAsString(itemRequestDtos))
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .header("X-Sharer-User-Id", 1))
-
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(itemRequestDtos)));
     }
-
 
     @Test
     void getRequestById() throws Exception {
         ItemRequestDto itemRequestDto = toRequestDto(itemRequest);
         when(requestServiceImpl.getRequestById(any(), anyLong()))
                 .thenReturn(itemRequestDto);
-
         mockMvc.perform(get("/requests/1")
                         .content(objectMapper.writeValueAsString(itemRequestDto))
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .header("X-Sharer-User-Id", 1))
-
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(itemRequest.getId()), Long.class))
                 .andExpect(jsonPath("$.description", is(itemRequest.getDescription())));
@@ -104,7 +95,6 @@ class ItemRequestControllerTest {
             request.setId(itemRequest.getId());
             request.setDescription(itemRequest.getDescription());
             request.setCreated(itemRequest.getCreated());
-
             itemRequestDto.add(request);
         }
         return itemRequestDto;

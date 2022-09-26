@@ -23,6 +23,5 @@ class UserRepositoryTest {
         user = repository.findById(user.getId()).orElse(new User());
         Assertions.assertEquals(user.getName(), "demo");
         repository.deleteAll();
-
     }
 }

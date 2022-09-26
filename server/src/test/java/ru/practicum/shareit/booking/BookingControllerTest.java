@@ -29,7 +29,6 @@ import static ru.practicum.shareit.user.dto.UserMapper.toUserDtoBooking;
 
 @WebMvcTest(controllers = BookingController.class)
 class BookingControllerTest {
-
     @Autowired
     private ObjectMapper objectMapper;
     @MockBean
@@ -41,14 +40,12 @@ class BookingControllerTest {
     @BeforeEach
     void beforeEach() {
         booking = new Booking(1L, LocalDateTime.now().plusMinutes(1), LocalDateTime.now().plusDays(1), new Item(), new User(), WAITING);
-
     }
 
     @Test
     void bookingRequest() throws Exception {
         when(bookingServiceImpl.bookingRequest(any(), anyLong(), anyLong()))
                 .thenReturn(booking);
-
         mockMvc.perform(post("/bookings")
                         .content(objectMapper.writeValueAsString(booking))
                         .characterEncoding(StandardCharsets.UTF_8)
@@ -56,15 +53,12 @@ class BookingControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .header("X-Sharer-User-Id", 1L))
                 .andExpect(status().isOk());
-
     }
-
 
     @Test
     void confirmOrRejectBooking() throws Exception {
         when(bookingServiceImpl.confirmOrRejectBooking(any(), any(), anyLong()))
                 .thenReturn(booking);
-
         mockMvc.perform(patch("/bookings/1")
                         .content(objectMapper.writeValueAsString(booking))
                         .characterEncoding(StandardCharsets.UTF_8)
@@ -74,7 +68,6 @@ class BookingControllerTest {
                         .param("approved", "true"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(booking.getId()), Long.class));
-
     }
 
     @Test
@@ -82,7 +75,6 @@ class BookingControllerTest {
         BookingDto bookingDto = toBookingDto(booking);
         when(bookingServiceImpl.getBookingByOwner(anyLong(), anyLong()))
                 .thenReturn(bookingDto);
-
         mockMvc.perform(get("/bookings/1")
                         .content(objectMapper.writeValueAsString(bookingDto))
                         .characterEncoding(StandardCharsets.UTF_8)
@@ -91,7 +83,6 @@ class BookingControllerTest {
                         .header("X-Sharer-User-Id", 1L))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(booking.getId()), Long.class));
-
     }
 
     @Test
@@ -99,7 +90,6 @@ class BookingControllerTest {
         List<BookingDto> bookingDto = List.of(toBookingDto(booking));
         when(bookingServiceImpl.getBookingByOwnerAll(anyLong(), any(), anyInt(), anyInt()))
                 .thenReturn(bookingDto);
-
         mockMvc.perform(get("/bookings/owner")
                         .content(objectMapper.writeValueAsString(bookingDto))
                         .characterEncoding(StandardCharsets.UTF_8)
@@ -109,7 +99,6 @@ class BookingControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(bookingDto)));
     }
-
 
     private BookingDto toBookingDto(Booking booking) {
         BookingDto bookingDto = new BookingDto();
