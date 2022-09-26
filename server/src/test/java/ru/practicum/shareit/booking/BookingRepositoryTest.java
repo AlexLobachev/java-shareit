@@ -21,7 +21,6 @@ import static ru.practicum.shareit.booking.model.Status.APPROVED;
 @DataJpaTest
 @Transactional
 @TestPropertySource(properties = {"db.shareit"})
-
 class BookingRepositoryTest {
     @Autowired
     private BookingRepository bookingRepository;
@@ -31,6 +30,7 @@ class BookingRepositoryTest {
     private ItemRepository itemRepository;
     private Booking booking;
     private User user;
+
     @BeforeEach
     void beforeEach() {
         user = new User();

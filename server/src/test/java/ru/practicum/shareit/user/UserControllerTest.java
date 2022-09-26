@@ -67,7 +67,7 @@ class UserControllerTest {
         when(userServiceImpl.getUser(anyLong()))
                 .thenReturn(user);
 
-        mockMvc.perform(get("/users/"+user.getId())
+        mockMvc.perform(get("/users/" + user.getId())
                         .content(objectMapper.writeValueAsString(user))
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)

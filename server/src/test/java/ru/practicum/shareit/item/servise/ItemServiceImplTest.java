@@ -31,8 +31,9 @@ class ItemServiceImplTest {
     private final UserServiceImpl userServiceImpl;
     private User user;
     private Item item;
+
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         user = new User();
         user.setName("Test");
         user.setEmail("Test@tests.ru");

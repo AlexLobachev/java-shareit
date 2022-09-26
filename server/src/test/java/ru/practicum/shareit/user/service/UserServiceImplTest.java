@@ -14,11 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
-//@SpringBootTest
 
-//@AutoConfigureTestDatabase
-//@RequiredArgsConstructor(onConstructor_ = @Autowired)
-//@TestPropertySource(properties = {"db.shareit"})
 @SpringBootTest
 @AutoConfigureTestDatabase
 @TestPropertySource(properties = {"db.shareit"})
@@ -28,7 +24,7 @@ public class UserServiceImplTest {
     private UserServiceImpl userServiceImpl;
 
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         user = new User();
         user.setName("Test");
         user.setEmail("Test@test.ru");

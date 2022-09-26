@@ -9,10 +9,9 @@ import ru.practicum.shareit.user.model.User;
 
 @DataJpaTest
 @Transactional
-        //@RequiredArgsConstructor(onConstructor_ = @Autowired)
 class UserRepositoryTest {
     @Autowired
-    private  UserRepository repository;
+    private UserRepository repository;
 
     @Test
     void updateUserByAll() {

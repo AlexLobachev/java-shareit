@@ -31,11 +31,12 @@ class BookingServiceImplTest {
     private final ItemServiceImpl itemServiceImpl;
     private final UserServiceImpl userServiceImpl;
     private Booking booking;
-    private  User user;
-    private  User user2;
-    private  Item item;
+    private User user;
+    private User user2;
+    private Item item;
+
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         user = new User();
         user.setName("Alex");
         user.setEmail("Alex@mail.ru");
@@ -55,6 +56,7 @@ class BookingServiceImplTest {
         booking.setItem(item);
 
     }
+
     @Test
     void bookingRequest() {
         userServiceImpl.addUser(user);
@@ -78,7 +80,7 @@ class BookingServiceImplTest {
         itemServiceImpl.addItem(item, user.getId());
         bookingServiceImpl.bookingRequest(booking, user2.getId(), item.getId());
 
-        Booking booking2 = bookingServiceImpl.confirmOrRejectBooking(booking.getId(), true,     user.getId());
+        Booking booking2 = bookingServiceImpl.confirmOrRejectBooking(booking.getId(), true, user.getId());
         assertThat(booking2.getStatus(), equalTo(Status.APPROVED));
 
         bookingServiceImpl.deleteAll();

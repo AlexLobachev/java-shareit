@@ -14,7 +14,6 @@ import java.util.List;
 @DataJpaTest
 @Transactional
 @TestPropertySource(properties = {"db.shareit"})
-
 class ItemRepositoryTest {
     @Autowired
     private ItemRepository itemRepository;
