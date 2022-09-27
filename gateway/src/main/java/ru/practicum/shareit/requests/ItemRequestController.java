@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.shareit.requests.dto.ItemRequestDto;
+import ru.practicum.shareit.requests.dto.RequestDto;
 
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
@@ -18,7 +18,7 @@ public class ItemRequestController {
     private final RequestsClient requestsClient;
 
     @PostMapping
-    public ResponseEntity<Object> addRequest(@Validated @RequestBody ItemRequestDto requestDto,
+    public ResponseEntity<Object> addRequest(@Validated @RequestBody RequestDto requestDto,
                                              @RequestHeader("X-Sharer-User-Id") Long userId) {
         return requestsClient.addRequest(requestDto, userId);
     }

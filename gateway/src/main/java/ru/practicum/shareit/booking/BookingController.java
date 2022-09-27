@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.shareit.booking.dto.BookingDto;
+import ru.practicum.shareit.booking.dto.BookingDtoGateway;
 import ru.practicum.shareit.booking.dto.BookingState;
 
 import javax.validation.ValidationException;
@@ -23,7 +23,7 @@ public class BookingController {
     private final BookingClient bookingClient;
 
     @PostMapping
-    public ResponseEntity<Object> bookingRequest(@Validated @RequestBody BookingDto bookingDto,
+    public ResponseEntity<Object> bookingRequest(@Validated @RequestBody BookingDtoGateway bookingDto,
                                                  @RequestHeader("X-Sharer-User-Id") Long id) {
         return bookingClient.bookingRequest(bookingDto, id, bookingDto.getItemId());
     }

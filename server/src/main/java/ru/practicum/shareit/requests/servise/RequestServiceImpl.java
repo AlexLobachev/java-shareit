@@ -30,7 +30,7 @@ public class RequestServiceImpl implements RequestService {
 
     public List<ItemRequestDto> getRequest(Long userId) {
         userService.getUser(userId);
-        return toRequestDto(itemRequestRepository.findAllByRequestorId(userId), itemRepository.findAllByRequestId(userId));//!!!Переделать по человечески
+        return toRequestDto(itemRequestRepository.findAllByRequestorId(userId), itemRepository.findAllByRequestId(userId));
 
     }
 

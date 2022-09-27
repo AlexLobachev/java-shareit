@@ -15,7 +15,7 @@ public class ItemValidator {
     private final BookingRepository bookingRepository;
 
     public void checkUser(Long idOwner, Long id) {
-        if (!itemRepository.getById(id).getOwner().getId().equals(idOwner)) {
+        if (!itemRepository.findById(id).get().getOwner().getId().equals(idOwner)) {
             throw new ExceptionNotFoundUser("Пользователю не принадлежит эта вещь");
         }
     }

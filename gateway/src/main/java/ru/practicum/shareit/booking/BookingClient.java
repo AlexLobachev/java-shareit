@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.DefaultUriBuilderFactory;
-import ru.practicum.shareit.booking.dto.BookingDto;
+import ru.practicum.shareit.booking.dto.BookingDtoGateway;
 import ru.practicum.shareit.booking.dto.BookingState;
 import ru.practicum.shareit.client.BaseClient;
 import ru.practicum.shareit.exception.ExclusionInvalidRequest;
@@ -29,7 +29,7 @@ public class BookingClient extends BaseClient {
         );
     }
 
-    public ResponseEntity<Object> bookingRequest(BookingDto booking, Long userId, Long itemId) {
+    public ResponseEntity<Object> bookingRequest(BookingDtoGateway booking, Long userId, Long itemId) {
         if (booking.getStart().isAfter(booking.getEnd())) {
             throw new ExclusionInvalidRequest("Время окончания не может быть раньше времени старта");
         }
